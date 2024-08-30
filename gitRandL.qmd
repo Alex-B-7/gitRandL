@@ -1,0 +1,84 @@
+---
+title: "Connecting a remote repository to a local repository on your local device through the command line/terminal"
+---
+
+## Make two new directories on your computer
+
+-   It will be easier to have two terminals open at the same time
+
+```{bash}
+mkdir /Users/alex/Desktop/bTerminal1
+```
+
+```{bash}
+mkdir /Users/alex/Desktop/bTerminal2
+```
+
+-   Set each terminal to one of those directories
+
+## Initialize a git repository in the local repository
+
+-   /Users/alex/Desktop/bTerminal1 is the local repository for this example
+
+    ```{bash}
+    git init
+    ```
+
+## Initialize a bare git repository in the remote repository
+
+```{bash}
+git init -bare
+```
+
+## Add the remote repository to your local repository
+
+```{bash}
+git remote add origin /Users/alex/Desktop/bTerminal2
+```
+
+## Create a random file
+
+-   We create a random file to test and make it easier to check if out pushes and pulls are working correctly
+
+```{bash}
+touch foo.txt
+```
+
+## Add, commit and push the file to the remote repository
+
+```{bash}
+git add .
+git commit -m "Initial commit"
+git push -u origin main
+```
+
+## Clone the remote repository inside the remote repository
+
+-   We have to clone the repository because bare repositories don't show us any files
+
+-   Also we want to clone it inside of the remote repository so that it is easier to know where the cloned repository belongs to
+
+```{bash}
+git clone /Users/alex/Desktop/bTerminal2 bTerminal3
+```
+
+## Pull in the files from the local repository
+
+-   Change your directory to the cloned repository
+
+```{bash}
+cd /Users/alex/Desktop/bTerminal2/bTerminal3
+```
+
+-   Pull the files in
+
+```{bash}
+git pull origin main
+```
+
+-   You should see that it pulled in foo.txt
+
+-   You can run "ls" to confirm the files were pulled in
+
+
+    \
